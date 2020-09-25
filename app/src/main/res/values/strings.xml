@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">haiantest</string>
+    <string name="shangban">上班</string>
+    <string name="kaiji">开机</string>
+</resources>
