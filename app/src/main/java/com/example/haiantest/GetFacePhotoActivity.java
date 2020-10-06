@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -49,9 +50,10 @@ public class GetFacePhotoActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void setView() {
-        sfview = (SurfaceView) findViewById(R.id.sfview);
-        img_back = (ImageView) findViewById(R.id.img_back);
-        img_sure = (ImageView) findViewById(R.id.img_sure);
+        sfview =  findViewById(R.id.sfview);
+        img_back =  findViewById(R.id.img_back);
+        img_sure =  findViewById(R.id.img_sure);
+        img_sure.setVisibility(View.GONE);
     }
 
     private void setData() {
@@ -59,6 +61,12 @@ public class GetFacePhotoActivity extends AppCompatActivity implements View.OnCl
         img_sure.setOnClickListener(this);
         //获取前置摄像头，显示在SurfaceView上
         setSurFaceView();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getCameraPic();
+            }
+        }, 2000);
     }
 
     @Override
@@ -164,7 +172,7 @@ public class GetFacePhotoActivity extends AppCompatActivity implements View.OnCl
             //将bitmap保存，记录照片本地地址，留待之后上传
             boolean b = saveBitmap(mBmp);
             if (b) {
-//                ToastUtils.showToast(this, "人脸保存成功");
+                ToastUtils.showToast(this, getIntent().getStringExtra("msg"));
                 Intent intent = getIntent().putExtra("face_pic_url", fileUrl);
                 setResult(RESULT_FOR_FACE, intent);
                 finish();
