@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class GetFacePhotoActivity extends AppCompatActivity implements View.OnClickListener, Camera.PreviewCallback {
     private SurfaceView sfview;
@@ -119,7 +120,7 @@ public class GetFacePhotoActivity extends AppCompatActivity implements View.OnCl
         mCamera.setDisplayOrientation(90);
         Camera.Parameters parameters = mCamera.getParameters();// 得到摄像头的参数
         parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-        mCamera.setParameters(parameters);
+//        mCamera.setParameters(parameters);
         mCamera.startPreview();//开启预览
         mCamera.setPreviewCallback(this);//开启Camera预览回调，重写onPreviewFrame获取相机回调
         mCamera.cancelAutoFocus();//聚焦
